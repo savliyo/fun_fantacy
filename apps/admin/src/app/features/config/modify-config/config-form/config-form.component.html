@@ -1,0 +1,49 @@
+<mx-form [form]="configForm" [zodSchema]="Z_config">
+  <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+    <mx-input
+      label="Ad Banner Id"
+      [control]="formControls.adBannerID"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Ad Reward Id"
+      [control]="formControls.adRewardID"
+      [showErrors]="showErrors"
+    />
+    <mx-editor
+      label="Privacy Policy"
+      [control]="formControls.privacyPolicy"
+      [showErrors]="showErrors"
+    />
+    <mx-editor
+      label="About Us"
+      [control]="formControls.aboutUs"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Telegram Link"
+      [control]="formControls.telegramLink"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Whatsapp Link"
+      [control]="formControls.whatsappLink"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Youtube Link"
+      [control]="formControls.youtubeLink"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Facebook Link"
+      [control]="formControls.facebookLink"
+      [showErrors]="showErrors"
+    />
+    <mx-checkbox
+      label="Ads"
+      [control]="formControls.ads"
+      [showErrors]="showErrors"
+    />
+  </div>
+</mx-form>

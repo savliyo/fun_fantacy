@@ -1,0 +1,44 @@
+{
+    # Global options block
+    # Use locally-trusted certificates (for development)
+    # local_certs
+}
+
+# Define the main server for your IP address (replace 192.168.1.100 with your actual IP)
+# 194.238.17.220:3000 {
+ #       tls {
+#        on_demand
+#    }
+#    reverse_proxy  api:3000 {
+#		lb_policy first
+#	}
+# }
+
+# Define the main server for HTTP (will redirect to HTTPS)
+194.238.17.220:80, 194.238.17.220:443 {
+      tls {
+        on_demand
+    }
+    root * /usr/share/caddy
+    file_server
+
+    encode zstd gzip
+
+    try_files {path} {path}/ /index.html
+
+    # Specific MIME types for JavaScript and CSS
+    @js {
+        path *.js
+    }
+    @css {
+        path *.css
+    }
+
+    handle @js {
+        header Content-Type application/javascript
+    }
+
+    handle @css {
+        header Content-Type text/css
+    }
+}

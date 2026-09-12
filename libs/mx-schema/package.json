@@ -1,0 +1,14 @@
+{
+  "name": "@maximus/mx-schema",
+  "version": "0.0.1",
+  "dependencies": {
+    "drizzle-orm": "^0.30.10",
+    "drizzle-zod": "^0.5.1",
+    "zod": "^3.23.6",
+    "drizzle-kit": "^0.21.2",
+    "dotenv": "^16.3.2"
+  },
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "private": true
+}

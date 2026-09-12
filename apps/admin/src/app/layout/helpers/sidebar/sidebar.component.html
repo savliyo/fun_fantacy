@@ -1,0 +1,86 @@
+<aside
+  class="fixed top-0 left-0 w-72 h-screen transition-transform border-r md:translate-x-0 bg-neutral-800 border-gray-700 z-[101]"
+  aria-label="Sidenav"
+  id="drawer-navigation"
+>
+  <div
+    class="overflow-y-auto pt-16 py-5 px-3 h-full bg-neutral-800 flex flex-col justify-between"
+  >
+    <div>
+      <div class="mb-2">
+        <mx-input
+          [control]="searchMenu"
+          placeholder="Search Menu"
+          inputClass="bg-neutral-800 border-gray-700 text-white"
+          [clearable]="true"
+          iconClass="text-gray-300"
+          leftIcon="search"
+        />
+      </div>
+      <ul class="space-y-1">
+        @for (m of sidebarService.mainMenu$ |async; track m.name) {
+        <li>
+          <a
+            [routerLink]="m.link"
+            routerLinkActive="bg-neutral-700"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="flex items-center px-2 py-1 text-base font-medium rounded-lg text-white hover:bg-neutral-700 group justify-between"
+          >
+            <span class="flex items-center">
+              <mx-icon [icon]="m.icon" class="mt-1" />
+              <span class="ml-3 tracking-wider">{{ m.name }}</span>
+            </span>
+            <!-- <mx-dropdown class="opacity-0 group-hover:opacity-100">
+                <mx-button variant="ghost" size="small-icon" trigger>
+                  <mx-icon icon="more_vert" />
+                </mx-button>
+                <mx-dropdown-item
+                  text="Archive"
+                  icon="archive"
+                  (handleClick)="sidebarService.archiveMenu(m.id)"
+                />
+              </mx-dropdown> -->
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+
+    <mx-dropdown *ngIf="(sidebarService.archived$ | async)?.length">
+      <ul class="space-y-1" trigger>
+        <li>
+          <a
+            class="flex items-center px-2 py-1 text-base font-medium rounded-lg text-white hover:bg-gray-800 group"
+          >
+            <mx-icon icon="archive" />
+            <span class="ml-3">Archived</span>
+          </a>
+        </li>
+      </ul>
+      <mx-dropdown-item
+        *ngFor="let m of sidebarService.archived$ | async"
+        [text]="m.name"
+        [icon]="m.icon"
+      >
+        <ng-template #item>
+          <div class="flex gap-1">
+            <button
+              (click)="navigateTo(m.link)"
+              class="w-full cursor-pointer relative flex select-none items-center rounded-sm px-2 py-0.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            >
+              <mx-icon [icon]="m.icon" class="mr-2" />
+              <p>{{ m.name }}</p>
+            </button>
+            <button
+              title="Unarchive"
+              (click)="sidebarService.unarchiveMenu(m.id)"
+              class="cursor-pointer relative flex select-none items-center rounded-sm px-2 py-0.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            >
+              <mx-icon icon="unarchive" />
+            </button>
+          </div>
+        </ng-template>
+      </mx-dropdown-item>
+    </mx-dropdown>
+  </div>
+</aside>

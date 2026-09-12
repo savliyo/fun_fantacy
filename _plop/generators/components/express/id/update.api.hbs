@@ -1,0 +1,28 @@
+import { Router } from 'express';
+import ah from '../../../../shared/async-handler.util';
+import { success } from '../../../../shared/api-response/response-handler';
+import { db } from '../../../../db/db';
+import { eq } from 'drizzle-orm';
+import { validate } from '../../../../shared/middlewares/validation.middleware';
+import {
+  {{dbSchema}},
+  v_param_id,
+  {{zodSchema}}_insert,
+} from '../../../../../../../libs/mx-schema/src';
+
+export default Router().put(
+  '/update/:id',
+  validate({
+    body: {{zodSchema}}_insert,
+    params: v_param_id,
+  }),
+  ah(async (req, res) => {
+    const result = await db
+      .update({{dbSchema}})
+      .set(req.body)
+      .where(eq({{dbSchema}}.id, req.params.id))
+      .returning();
+
+    success(res, result, 'updated');
+  })
+);

@@ -1,0 +1,85 @@
+@use '../../../../styles/colors.scss' as colors;
+@use '../../../../styles/variables.scss' as v;
+
+#sidebar {
+  min-width: v.$sidebar-width;
+  max-width: v.$sidebar-width;
+  background: colors.$emerald-800;
+  color: colors.$neutral-100;
+  transition: all 0.3s;
+  min-height: 100vh;
+  position: fixed;
+}
+
+#sidebar.active {
+  margin-left: -(v.$sidebar-width);
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: colors.$emerald-900;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+}
+
+#sidebar ul p {
+  color: colors.$neutral-100;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  display: block;
+  color: colors.$neutral-100;
+  text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+  color: colors.$neutral-100;
+  background: colors.$emerald-700;
+}
+
+#sidebar ul li a.active {
+  color: colors.$neutral-100;
+  background: colors.$emerald-600;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+
+ul.CTAs {
+  padding: 20px;
+}
+
+ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+a.download {
+  background: colors.$neutral-100;
+  color: #7386d5;
+}
+
+a.article,
+a.article:hover {
+  background: #6d7fcc !important;
+  color: colors.$neutral-100 !important;
+}

@@ -1,0 +1,42 @@
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-{{name}}-list',
+  template: `
+  <page-header header="{{properCase name}}" [showCancel]="false">
+      <mx-button  (handleClick)="create()">
+        <span class="flex items-center">
+          <p>Add {{properCase name}}</p>
+        </span>
+      </mx-button>
+    </page-header>
+  <mx-grid-shell gridTitle="{{properCase name}}s" apiURL="/{{name}}/list">
+    <!-- columns -->
+      {{#each schemaValue.properties}}
+      <mx-column field="{{@key}}" alignment="left" />
+      {{/each}}
+    <!-- columns -->
+
+    <!-- filters -->
+    {{#each schemaValue.properties}}
+      <mx-grid-filter label="{{properCase @key}}" field="{{@key}}"  />
+    {{/each}}
+    <!-- filters -->
+
+    <!-- actions -->
+      <mx-action icon="edit" (handleClick)="edit($event)" tooltip="Edit" />
+    <!-- actions -->
+  </mx-grid-shell>`,
+})
+export class {{properCase name}}ListComponent {
+  private router = inject(Router);
+
+  create() {
+    this.router.navigate(['/{{name}}/create']);
+  }
+
+  edit(e: any) {
+    this.router.navigate(['/{{name}}/update/' + e.cellData.id]);
+  }
+}

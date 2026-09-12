@@ -1,0 +1,22 @@
+import { Router } from 'express';
+import ah from '../../../shared/async-handler.util';
+import { success } from '../../../shared/api-response/response-handler';
+import { validate } from '../../../shared/middlewares/validation.middleware';
+import {
+  v_pagination,
+  {{dbSchema}}
+} from '../../../../../../libs/mx-schema/src';
+import { getTotalCount } from '../../../db/utils-db/pg/count-rows';
+import { listFiltersToQuery } from '../../../db/utils-db/pg/list-filters/list-filters-middleware';
+
+
+export default Router().get(
+  '/list',
+  validate({ query: v_pagination }),
+  listFiltersToQuery({{dbSchema}}),
+  ah(async (req, res) => {
+    const count = await getTotalCount({{dbSchema}});
+    const rows =  await req.sqlQuery.execute();
+    success(res, {rows, count}, 'success');
+  })
+);

@@ -1,0 +1,9 @@
+      {
+        path: "{{name}}",
+        canActivate: [authGuard],
+        loadChildren: () =>
+          import("./features/{{name}}/{{name}}.module").then(
+            (m) => m.{{properCase name}}Module
+          ),
+      },
+// APPEND ANGULAR ROUTES

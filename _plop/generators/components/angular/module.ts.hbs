@@ -1,0 +1,46 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MxGridShellComponent } from '../../shared/grid-shell/grid-shell';
+import { MxGridToolbarComponent } from '../../shared/ui/mx-data-grid/components/toolbar/mx-toolbar';
+import { MxInputComponent } from '../../shared/ui/form/mx-input';
+import { MxButtonComponent } from '../../shared/ui/button';
+import { MxIconComponent } from '../../shared/ui/icon';
+import { PageHeaderComponent } from '../../shared/misc/page-header/page-header.component';
+import { GridColumnsComponent } from '../../shared/ui/mx-data-grid/components/base-table/columns';
+import { MxActionComponent } from '../../shared/ui/mx-data-grid/components/base-table/action';
+import { MxFormComponent } from '../../shared/ui/form/mx-form';
+import { MxGridFilterComponent } from '../../shared/grid-shell/filters/components/grid-filter';
+
+import { {{properCase name}}RoutingModule } from './{{name}}-routing.module';
+
+import { {{properCase name}}ListComponent } from './{{name}}-list/{{name}}-list.component';
+import { {{properCase name}}FormComponent } from './modify-{{name}}/{{name}}-form/{{name}}-form.component';
+import { Create{{properCase name}}Component } from './modify-{{name}}/create-{{name}}.component';
+import { Update{{properCase name}}Component } from './modify-{{name}}/update-{{name}}.component';
+
+@NgModule({
+  declarations: [
+    {{properCase name}}ListComponent,
+    {{properCase name}}FormComponent,
+    Create{{properCase name}}Component,
+    Update{{properCase name}}Component,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    PageHeaderComponent,
+    MxGridShellComponent,
+    GridColumnsComponent,
+    MxGridToolbarComponent,
+    MxInputComponent,
+    MxButtonComponent,
+    MxIconComponent,
+    MxActionComponent,
+    MxFormComponent,
+    MxGridFilterComponent,
+    {{properCase name}}RoutingModule
+  ],
+})
+export class {{properCase name}}Module {}

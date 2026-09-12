@@ -1,0 +1,21 @@
+@use '../../../../../../styles/colors.scss' as c;
+
+@keyframes showtag {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.btn {
+  lucide-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+button:hover {
+  background-color: c.$emerald-100;
+}

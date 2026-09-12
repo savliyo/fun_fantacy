@@ -1,0 +1,20 @@
+<mx-form [form]="notificationForm">
+  <div class="grid grid-cols-1 gap-4">
+    <mx-input
+      label="Ttitle"
+      [control]="notificationFormControls.title"
+      [showErrors]="showErrors"
+    />
+
+    <mx-textarea
+      label="Body"
+      [control]="notificationFormControls.body"
+      [showErrors]="showErrors"
+    />
+    <mx-file-upload
+      label="Image"
+      [maxFileSizeMB]="25"
+      (handleFileChange)="handleFileChange($event)"
+    />
+  </div>
+</mx-form>

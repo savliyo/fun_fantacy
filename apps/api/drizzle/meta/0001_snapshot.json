@@ -1,0 +1,693 @@
+{
+  "id": "09f748fa-dad4-4c9d-a42a-a353af7e4b60",
+  "prevId": "4d2207b0-df74-4276-9de3-db361f097894",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.customerFcm": {
+      "name": "customerFcm",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "customerID": {
+          "name": "customerID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "customerFcm_customerID_customer_id_fk": {
+          "name": "customerFcm_customerID_customer_id_fk",
+          "tableFrom": "customerFcm",
+          "tableTo": "customer",
+          "columnsFrom": [
+            "customerID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.customerOffer": {
+      "name": "customerOffer",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "customerID": {
+          "name": "customerID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "offerID": {
+          "name": "offerID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orderID": {
+          "name": "orderID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "paymentID": {
+          "name": "paymentID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "customerOffer_customerID_customer_id_fk": {
+          "name": "customerOffer_customerID_customer_id_fk",
+          "tableFrom": "customerOffer",
+          "tableTo": "customer",
+          "columnsFrom": [
+            "customerID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "customerOffer_offerID_offer_id_fk": {
+          "name": "customerOffer_offerID_offer_id_fk",
+          "tableFrom": "customerOffer",
+          "tableTo": "offer",
+          "columnsFrom": [
+            "offerID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.customer": {
+      "name": "customer",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "deviceID": {
+          "name": "deviceID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "device": {
+          "name": "device",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'ios'"
+        },
+        "removeAds": {
+          "name": "removeAds",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "customer_deviceID_unique": {
+          "name": "customer_deviceID_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "deviceID"
+          ]
+        }
+      }
+    },
+    "public.match": {
+      "name": "match",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "gameSlug": {
+          "name": "gameSlug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'cricket'"
+        },
+        "teamOne": {
+          "name": "teamOne",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamOneLogo": {
+          "name": "teamOneLogo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamTwo": {
+          "name": "teamTwo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamTwoLogo": {
+          "name": "teamTwoLogo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamTwoSlug": {
+          "name": "teamTwoSlug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamOneSlug": {
+          "name": "teamOneSlug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamOnePlayers": {
+          "name": "teamOnePlayers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "teamTwoPlayers": {
+          "name": "teamTwoPlayers",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "venue": {
+          "name": "venue",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "league": {
+          "name": "league",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "h2hTeam": {
+          "name": "h2hTeam",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "h2hTeamImage": {
+          "name": "h2hTeamImage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "premiumTeamImage": {
+          "name": "premiumTeamImage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "startDate": {
+          "name": "startDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "startTime": {
+          "name": "startTime",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "format": {
+          "name": "format",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'waiting'"
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        }
+      },
+      "indexes": {
+        "gameSlugIdx": {
+          "name": "gameSlugIdx",
+          "columns": [
+            "gameSlug"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.menu": {
+      "name": "menu",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "icon": {
+          "name": "icon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "parent": {
+          "name": "parent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.notifications": {
+      "name": "notifications",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.offer": {
+      "name": "offer",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fakeAmount": {
+          "name": "fakeAmount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period": {
+          "name": "period",
+          "type": "period",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'1'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.permission": {
+      "name": "permission",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.rolePermission": {
+      "name": "rolePermission",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "menuID": {
+          "name": "menuID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permissionID": {
+          "name": "permissionID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "roleID": {
+          "name": "roleID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "roleIdx": {
+          "name": "roleIdx",
+          "columns": [
+            "roleID"
+          ],
+          "isUnique": false
+        },
+        "permissionIdx": {
+          "name": "permissionIdx",
+          "columns": [
+            "permissionID"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.role": {
+      "name": "role",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.userRole": {
+      "name": "userRole",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "roleID": {
+          "name": "roleID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userID": {
+          "name": "userID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "emailIdx": {
+          "name": "emailIdx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "public.gameSlug": {
+      "name": "gameSlug",
+      "schema": "public",
+      "values": [
+        "cricket",
+        "football",
+        "basketball",
+        "kabaddi"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "completed",
+        "in-progress",
+        "waiting",
+        "done"
+      ]
+    },
+    "public.period": {
+      "name": "period",
+      "schema": "public",
+      "values": [
+        "1",
+        "15",
+        "30"
+      ]
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

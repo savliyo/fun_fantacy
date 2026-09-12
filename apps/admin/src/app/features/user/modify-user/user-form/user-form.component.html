@@ -1,0 +1,14 @@
+<mx-form [form]="userForm" [zodSchema]="Z_user">
+  <div class="grid grid-cols-3 gap-4">
+    <mx-input
+      label="Email"
+      [control]="formControls.email"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Password"
+      [control]="formControls.password"
+      [showErrors]="showErrors"
+    />
+  </div>
+</mx-form>

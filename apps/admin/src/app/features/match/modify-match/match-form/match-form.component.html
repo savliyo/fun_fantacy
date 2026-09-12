@@ -1,0 +1,136 @@
+<mx-form [form]="matchForm" [zodSchema]="zMatch">
+  <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+    <mx-select
+      label="Game Slug"
+      [control]="matchFormControls.gameSlug"
+      [showErrors]="showErrors"
+      [items]="GAMES"
+      #menuSelect
+    >
+    </mx-select>
+    <mx-input
+      label="Team One"
+      [control]="matchFormControls.teamOne"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Team Two"
+      [control]="matchFormControls.teamTwo"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Venue"
+      [control]="matchFormControls.venue"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="League"
+      [control]="matchFormControls.league"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Format"
+      [control]="matchFormControls.format"
+      [showErrors]="showErrors"
+    />
+    @if (formType === 'add') {
+    <mx-input
+      label="Start Date"
+      type="date"
+      [control]="matchFormControls.startDate"
+      [showErrors]="showErrors"
+    ></mx-input>
+    <mx-input
+      label="Start Time"
+      type="time"
+      [control]="matchFormControls.startTime"
+      [showErrors]="showErrors"
+    ></mx-input>
+
+    <mx-input
+    label="Premium Team Price"
+    type="number"
+    [control]="matchFormControls.premiumTeamPrice"
+    [showErrors]="showErrors"
+  ></mx-input>
+    }
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 mt-2">
+    <mx-textarea
+      label="Team One Players"
+      [control]="matchFormControls.teamOnePlayers"
+      [showErrors]="showErrors"
+      [hints]="['Add players comma seperated']"
+    ></mx-textarea>
+    <mx-textarea
+      label="Team two Players"
+      [control]="matchFormControls.teamTwoPlayers"
+      [showErrors]="showErrors"
+      [hints]="['Add players comma seperated']"
+    ></mx-textarea>
+
+    <mx-editor
+      label="Description"
+      [control]="matchFormControls.description"
+      [showErrors]="showErrors"
+    />
+    <mx-editor
+      [control]="matchFormControls.h2hTeam"
+      [showErrors]="showErrors"
+      label="H2H Team"
+    />
+  </div>
+</mx-form>
+
+<div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 my-4">
+  <mx-file-upload
+    (handleFileChange)="handleTeamOneLogo($event)"
+    label="Team One Logo"
+    accept="image/png, image/jpeg"
+    [maxFileSizeMB]="25"
+  />
+  <mx-file-upload
+    (handleFileChange)="handleTeamTwoLogo($event)"
+    label="Team Two Logo"
+    accept="image/png, image/jpeg"
+    [maxFileSizeMB]="25"
+  />
+  <mx-file-upload
+    (handleFileChange)="handleH2hTeamImage($event)"
+    accept="image/png, image/jpeg"
+    label="H2H Team Image"
+    [maxFileSizeMB]="25"
+  />
+  <mx-file-upload
+    (handleFileChange)="handlePremiumTeamImage($event)"
+    accept="image/png, image/jpeg"
+    label="Premium Team Image"
+    [maxFileSizeMB]="25"
+  />
+  <mx-file-upload
+  (handleFileChange)="handleGlImage($event)"
+  accept="image/png, image/jpeg"
+  label="GL Image"
+  [maxFileSizeMB]="25"
+/>
+</div>
+
+<div class="mt-4 flex flex-col gap-2" *ngIf="formType === 'update'">
+  <div>
+    <p>Team One Logo</p>
+    <mx-image [filename]="previousFilenames.teamOneLogo" />
+  </div>
+  <div>
+    <p>Team Two Logo</p>
+    <mx-image [filename]="previousFilenames.teamTwoLogo" />
+  </div>
+  <div>
+    <p>H2H Team Image</p>
+    <mx-image [filename]="previousFilenames.h2hTeamImage" />
+  </div>
+  <div>
+    <p>Premium Team Image</p>
+    <mx-image [filename]="previousFilenames.premiumTeamImage" />
+  </div>
+</div>

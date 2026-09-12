@@ -1,0 +1,42 @@
+<div class="grid h-screen place-items-center">
+  <div mxCard class="w-[25rem]">
+    <div mxCardHeader>
+      <div mxCardtitle class="align-center flex justify-center">
+        <img src="/assets/logo.png" class="h-20 w-h-20" />
+      </div>
+    </div>
+    <div mxCardContent>
+      <div class="flex justify-center align-center">
+        <p class="text-2xl self-end">{{ PANEL_CONFIG.name }}</p>
+      </div>
+
+      <div class="grid gap-4">
+        <div class="grid gap-2">
+          <mx-input
+            [control]="loginForm.controls.email"
+            [showErrors]="showErrors"
+            type="email"
+            label="Email"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="grid gap-2">
+          <mx-input
+            [control]="loginForm.controls.password"
+            [showErrors]="showErrors"
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <mx-button type="button" (handleClick)="handleSubmit()"
+          >Login</mx-button
+        >
+      </div>
+      <div class="flex flex-col gap-2"></div>
+      <a class="text-blue-500 hover:underline cursor-pointer" (click)="openTandc()">Terms and conditions</a>
+      <a class="text-blue-500 hover:underline cursor-pointer" (click)="openrp()">Refund policy</a>
+      <a class="text-blue-500 hover:underline cursor-pointer" (click)="openpp()">Privacy policy</a>
+    </div>
+  </div>
+</div>

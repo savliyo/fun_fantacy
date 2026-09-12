@@ -1,0 +1,27 @@
+<mx-form [form]="offerForm" [zodSchema]="Z_offer">
+  <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-4">
+    <mx-input
+      label="Name"
+      [control]="formControls.name"
+      [showErrors]="showErrors"
+    />
+    <mx-input
+      label="Amount"
+      [control]="formControls.amount"
+      [showErrors]="showErrors"
+      type="number"
+    />
+    <mx-input
+      label="Fake Amount"
+      [control]="formControls.fakeAmount"
+      [showErrors]="showErrors"
+      type="number"
+    />
+    <mx-select
+      label="Period"
+      [control]="formControls.period"
+      [showErrors]="showErrors"
+      [items]="period"
+    />
+  </div>
+</mx-form>

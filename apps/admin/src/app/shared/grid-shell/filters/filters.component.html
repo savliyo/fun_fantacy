@@ -1,0 +1,103 @@
+<!-- VERSION >17 -->
+<div class="bg-background border-l w-80 flex flex-col h-screen overflow-auto">
+  <div
+    class="p-3 flex z-50 sticky top-0 bg-background justify-between items-center"
+  >
+    <p class="font-bold text-xl">Filters</p>
+    <mx-button (handleClick)="clearFilters()" variant="outline"
+      >Clear Filters</mx-button
+    >
+  </div>
+  <div class="p-3 flex flex-col gap-6">
+    @for(component of filters; track component.field) {
+    <div>
+      <label
+        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-1 capitalize"
+      >
+        {{ component.label || component.field }}
+      </label>
+      <div class="grid grid-cols-2 gap-4">
+        @switch(component.type) { @case('text') {
+        <ng-container
+          *ngTemplateOutlet="textFilter; context: { $implicit: component }"
+        ></ng-container>
+        } @case('number') {
+        <ng-container
+          *ngTemplateOutlet="numberFilter; context: { $implicit: component }"
+        ></ng-container>
+        } @case('select') {
+        <ng-container
+          *ngTemplateOutlet="selectFilter; context: { $implicit: component }"
+        ></ng-container>
+        } @case('date') {
+        <mx-input
+          [control]="controls[component.field]"
+          class="col-span-2"
+          type="date"
+          *ngIf="component.type === 'date'"
+        />
+        } }
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="mt-auto sticky bottom-0">
+    <div class="flex">
+      <mx-button
+        variant="secondary"
+        rounded="none"
+        class="flex-grow"
+        (handleClick)="close()"
+        >Cancel</mx-button
+      >
+      <mx-button
+        class="flex-grow"
+        rounded="none"
+        type="submit"
+        (handleClick)="handleSearch()"
+        >Search</mx-button
+      >
+    </div>
+  </div>
+</div>
+
+<ng-template #numberFilter let-component>
+  <mx-select
+    [control]="conditionControls[component.field]"
+    [items]="conditions.number"
+    [clearable]="false"
+    [searchable]="false"
+  />
+  @if(conditionControls[component.field].value !== 'between') {
+  <mx-input [control]="controls[component.field]" type="number" />
+  } @else if(conditionControls[component.field].value === 'between') {
+  <mx-input
+    [control]="controls[component.field]"
+    [hints]="['Add values with dash, eg: 100-200']"
+  />
+  }
+</ng-template>
+
+<ng-template #textFilter let-component>
+  <mx-select
+    [control]="conditionControls[component.field]"
+    [items]="conditions.text"
+    [clearable]="false"
+    [searchable]="false"
+  />
+  <mx-input [control]="controls[component.field]" />
+</ng-template>
+
+<ng-template #selectFilter let-component>
+  <mx-select
+    class="col-span-2"
+    [control]="controls[component.field]"
+    [items]="component.items"
+    [typeahead]="component.typeahead"
+    [multiple]="component.multiple"
+    [bindLabel]="component.bindLabel"
+    [bindValue]="component.bindValue"
+    [searchable]="component.searchable"
+  />
+</ng-template>

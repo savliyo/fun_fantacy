@@ -1,0 +1,48 @@
+<mx-form [form]='{{name}}Form' [zodSchema]='{{zodSchema}}'>
+  <div class='grid md:grid-cols-3 sm:grid-cols-1 gap-4'>
+    {{#each schemaValue.properties}}
+      {{#unless this.skipForm}}
+        {{#eq this.type 'string'}}
+          <mx-input
+            label='{{properCase @key}}'
+            [control]='formControls.{{@key}}'
+            [showErrors]='showErrors'
+          />
+        {{/eq}}
+        {{#eq this.type 'number'}}
+          <mx-input
+            label='{{properCase @key}}'
+            [control]='formControls.{{@key}}'
+            [showErrors]='showErrors'
+            type='number'
+          />
+        {{/eq}}
+        {{#eq this.type 'date'}}
+          <mx-input
+            label='{{properCase @key}}'
+            [control]='formControls.{{@key}}'
+            [showErrors]='showErrors'
+            type='date'
+          />
+        {{/eq}}
+        {{#eq this.type 'time'}}
+          <mx-input
+            label='{{properCase @key}}'
+            [control]='formControls.{{@key}}'
+            [showErrors]='showErrors'
+            type='time'
+          />
+        {{/eq}}
+      {{/unless}}
+    {{/each}}
+  </div>
+  {{#each schemaValue.properties}}
+    {{#eq this.formType 'textarea'}}
+      <mx-textarea
+        label='{{properCase @key}}'
+        [control]='formControls.{{@key}}'
+        [showErrors]='showErrors'
+      />
+    {{/eq}}
+  {{/each}}
+</mx-form>

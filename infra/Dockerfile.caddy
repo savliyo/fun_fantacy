@@ -1,0 +1,11 @@
+# Use the official Caddy image from Docker Hub
+FROM caddy:alpine
+
+COPY dist/apps/admin/browser /usr/share/caddy
+
+COPY infra/Caddyfile /etc/caddy/Caddyfile
+EXPOSE 80
+EXPOSE 3000
+
+# Run Caddy
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

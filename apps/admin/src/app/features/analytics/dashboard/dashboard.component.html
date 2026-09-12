@@ -1,0 +1,125 @@
+<h3 class="font-bold text-3xl">Dashboard</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+  <div mxCard class="bg-gradient-to-br from-emerald-800/30 via-transparent">
+    <div
+      mxCardHeader
+      class="flex-row items-center justify-between space-y-1 py-4 px-6"
+    >
+      <div
+        mxCardtitle
+        class="text-emerald-800 dark:text-emerald-300 tracking-wide"
+      >
+        Revenue
+      </div>
+      <mx-select
+        [items]="['last 7 days', 'last 30 days', 'last month', 'last 3 months']"
+        [searchable]="false"
+        [control]="timefilter"
+      />
+    </div>
+    <div mxCardContent>
+      <span class="flex">
+        <mx-icon icon="currency_rupee" class="mt-1" />
+        <p class="text-2xl font-bold">45,231.89</p>
+      </span>
+      <span class="flex gap-1 items-center cursor-pointer">
+        <p class="text-xs text-muted-foreground">View reports</p>
+        <mx-icon icon="arrow_right" class="mt-1" />
+      </span>
+    </div>
+  </div>
+  <div mxCard class="bg-gradient-to-br from-blue-800/30 via-transparent">
+    <div
+      mxCardHeader
+      class="flex-row items-center justify-between space-y-1 py-4 px-6"
+    >
+      <div mxCardtitle class="text-blue-800 dark:text-blue-300 tracking-wide">
+        New Customers
+      </div>
+      <mx-select
+        [items]="['last 7 days', 'last 30 days', 'last month', 'last 3 months']"
+        [searchable]="false"
+        [control]="timefilter"
+      />
+    </div>
+    <div mxCardContent>
+      <p class="text-2xl font-bold">250</p>
+      <span class="flex gap-1 items-center cursor-pointer">
+        <p class="text-xs text-muted-foreground">View reports</p>
+        <mx-icon icon="arrow_right" class="mt-1" />
+      </span>
+    </div>
+  </div>
+  <div mxCard class="bg-gradient-to-br from-purple-800/30 via-transparent">
+    <div
+      mxCardHeader
+      class="flex-row items-center justify-between space-y-1 py-4 px-6"
+    >
+      <div
+        mxCardtitle
+        class="text-purple-800 dark:text-purple-300 tracking-wide"
+      >
+        Orders
+      </div>
+      <mx-select
+        [items]="['last 7 days', 'last 30 days', 'last month', 'last 3 months']"
+        [searchable]="false"
+        [control]="timefilter"
+      />
+    </div>
+    <div mxCardContent>
+      <p class="text-2xl font-bold">20</p>
+      <span class="flex gap-1 items-center cursor-pointer">
+        <p class="text-xs text-muted-foreground">View reports</p>
+        <mx-icon icon="arrow_right" class="mt-1" />
+      </span>
+    </div>
+  </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+  <div mxCard>
+    <div
+      mxCardHeader
+      class="flex-row items-center justify-between space-y-1 py-4 px-6"
+    >
+      <div mxCardtitle>Last seven days orders</div>
+      <mx-icon icon="list_alt" size="lg" />
+    </div>
+    <div mxCardContent class="p-0">
+      <div id="bar-chart" class="w-full h-[350px]"></div>
+    </div>
+  </div>
+  <div mxCard>
+    <div
+      mxCardHeader
+      class="flex-row items-center justify-between space-y-1 py-4 px-6"
+    >
+      <div mxCardtitle>Previous two months revenue</div>
+      <mx-icon icon="currency_rupee" size="lg"/>
+    </div>
+    <div mxCardContent class="p-0">
+      <div id="line-chart" class="w-full h-[350px]"></div>
+    </div>
+  </div>
+</div>
+
+<mx-data-grid
+  [data]="mock"
+  [loading]="false"
+  [selectable]="false"
+  [collectionSize]="mock.length"
+  [hideFeatures]="['footer']"
+  maxHeight="500px"
+  minHeight="300px"
+  gridTitle="Recent Orders"
+>
+  <mx-column field="id" alignment="left" />
+  <mx-column field="name" alignment="left" />
+  <mx-column field="pinCode" title="Pin Code" />
+  <mx-column field="value" />
+  <mx-column field="recieved" alignment="left">
+    <ng-template #cell let-item>
+      {{ item.recieved | date }}
+    </ng-template>
+  </mx-column>
+</mx-data-grid>

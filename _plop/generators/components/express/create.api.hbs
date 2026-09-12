@@ -1,0 +1,20 @@
+import { Router } from 'express';
+import ah from '../../../shared/async-handler.util';
+import { success } from '../../../shared/api-response/response-handler';
+import { validate } from '../../../shared/middlewares/validation.middleware';
+import { db } from '../../../db/db';
+import { {{dbSchema}}, {{zodSchema}}_insert } from '../../../../../../libs/mx-schema/src';
+
+export default Router().post(
+  '/create',
+  validate({ body: {{zodSchema}}_insert }),
+  ah(async (req, res) => {
+
+    const result = await db
+      .insert({{dbSchema}})
+      .values(req.body)
+      .returning();
+
+    success(res, result, 'success');
+  })
+);

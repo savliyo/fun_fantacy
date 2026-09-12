@@ -1,0 +1,6 @@
+  @if (asString) {
+    {{asString}}
+  }@else if (asTemplate) {
+    <ng-template [ngTemplateOutlet]="asTemplate"></ng-template>
+  }
+

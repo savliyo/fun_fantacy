@@ -1,0 +1,80 @@
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import { {{properCase name}}FormComponent } from './{{name}}-form/{{name}}-form.component';
+import { ApiService } from '../../../shared/services/api.service';
+import { MxNotification } from '../../../shared/ui/notification/notification.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { SubSink } from '../../../shared/utils/sub-sink';
+import { T{{properCase name}} } from '../../../../../../../libs/mx-schema/src';
+
+@Component({
+  selector: 'edit-{{name}}',
+  template: ` <page-header header="Edit {{properCase name}}">
+      <mx-button  (handleClick)="handleSubmit()">
+        <span class="flex items-center">
+          <p>Save</p>
+        </span>
+      </mx-button>
+    </page-header>
+    <{{name}}-form />`,
+})
+export class Update{{properCase name}}Component implements OnInit, OnDestroy {
+  @ViewChild({{properCase name}}FormComponent) {{name}}FormComponent!: {{properCase name}}FormComponent;
+
+  private api = inject(ApiService);
+  private notif = inject(MxNotification);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router)
+
+  {{name}}ID!: string;
+  private requests = new SubSink()
+
+  ngOnInit(): void {
+    this.{{name}}ID = this.route.snapshot.params['id'];
+    this.fetch{{properCase name}}Details( this.{{name}}ID)
+  }
+
+  ngOnDestroy(): void {
+    this.requests.unsubscribe();
+  }
+
+  private fetch{{properCase name}}Details(id: string) {
+    this.api.get<T{{properCase name}}>(`/{{name}}/${id}`).subscribe(({ data }) => {
+       this.{{name}}FormComponent.patchValue(data);
+    });
+  }
+
+    handleSubmit() {
+    if (this.{{name}}FormComponent.isInValid()) {
+      this.{{name}}FormComponent.setShowErrors();
+      return;
+    }
+    this.requests.unsubscribe();
+    this.notif.show({
+      text: 'Updating {{properCase name}}',
+      id: 'update-{{name}}',
+      type: 'loading',
+    });
+
+    this.requests.sink = this.api
+      .put(`/{{name}}/update/${this.{{name}}ID}`, this.{{name}}FormComponent.getFormValue())
+      .subscribe({
+        next: () => {
+          this.notif.updateToast({
+            text: '{{properCase name}} updated',
+            id: 'update-{{name}}',
+            type: 'success',
+          });
+          this.router.navigate(['/{{name}}/list']);
+        },
+      });
+  }
+
+}

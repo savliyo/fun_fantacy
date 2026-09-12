@@ -1,0 +1,136 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+@import './styles/ng-select/default.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --main-background: 210deg 20% 98%;
+
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --radius: 0.3rem;
+
+    --sidebar-bg: 210 12% 13%;
+    --sidebar-foreground: 211.2 20.66% 76.27%;
+  }
+
+  .dark {
+    --main-background: 0deg 0% 9.02%;
+
+    // --background: 240 10% 3.9%;
+    --background: 0deg 0% 15%;
+    --foreground: 211.2 20.66% 76.27%;
+
+    --muted: 210 42% 74% / 0.08;
+    --muted-foreground: 240 5% 64.9%;
+
+    --popover: 0deg 0% 17%;
+    --popover-foreground: 211.2 20.66% 76.27%;
+
+    --card: 210 12% 13%;
+    --card-foreground: 211.2 20.66% 76.27%;
+
+    --border: 209 51% 77% / 0.16;
+    --input: 209 51% 77% / 0.16;
+
+    --primary: 211.2 20.66% 90.27%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 210 42% 74% / 0.08;
+    --secondary-foreground: 211.2 20.66% 76.27%;
+
+    --accent: 210 42% 74% / 0.08;
+    --accent-foreground: 211.2 20.66% 76.27%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --ring: 211.2 20.66% 70.27%;
+
+    --radius: 0.3rem;
+
+    --sidebar-bg: 210 12% 13%;
+    --sidebar-foreground: 211.2 20.66% 76.27%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}
+
+@layer utilities {
+  .step {
+    counter-increment: step;
+  }
+
+  .ng-select .ng-select-container {
+    @apply flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .ng-select.ng-select-opened > .ng-select-container {
+    @apply flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .ng-value {
+    @apply text-foreground;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .step:before {
+    @apply absolute w-8 h-8 bg-muted rounded-full font-medium text-center text-base inline-flex items-center justify-center -indent-px;
+    @apply ml-[-41px];
+    content: counter(step);
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
+
+.cdk-overlay-dark-backdrop {
+  @apply bg-background/60 backdrop-blur-sm;
+}

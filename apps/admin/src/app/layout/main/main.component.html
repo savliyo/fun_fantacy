@@ -1,0 +1,19 @@
+<div class="antialiased">
+  <mx-header></mx-header>
+
+  <ng-container *ngIf="sidebarService.sidebarOpen$ | async">
+    <ng-container *ngIf="themeService.theme$ | async as theme">
+      <mx-sidebar
+        (changeTheme)="themeService.changeTheme($event)"
+        [theme]="theme"
+      ></mx-sidebar>
+    </ng-container>
+  </ng-container>
+
+  <main
+    class="px-4 pt-14 pb-4 md:ml-72 h-auto bg-main-background text-card-foreground min-h-screen"
+    [ngClass]="{ 'md:ml-72': sidebarService.sidebarOpen$ | async }"
+  >
+    <router-outlet></router-outlet>
+  </main>
+</div>

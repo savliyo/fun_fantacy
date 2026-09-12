@@ -1,0 +1,15 @@
+:host {
+  @apply block py-1 px-4 bg-primary text-primary-foreground;
+  width: max-content;
+  font-size: 0.85rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+
+:host-context(.top) {
+  margin-bottom: 0.5rem;
+}
+
+:host-context(.bottom) {
+  margin-top: 0.5rem;
+}

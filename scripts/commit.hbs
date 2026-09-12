@@ -1,0 +1,18 @@
+# Release Notes
+
+{{#each releases}}
+## We are excited to release [{{version}}] on {{date}}
+
+{{#each commits}}
+### {{#if scope}}**{{scope}}:** {{/if}}{{subject}}
+
+{{#if body}}
+{{body}}
+{{/if}}
+
+Contributor: {{author.name}} ({{author.email}})
+
+Commit: [{{shortHash}}]({{commitUrl}})
+
+{{/each}}
+{{/each}}

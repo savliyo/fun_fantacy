@@ -1,0 +1,80 @@
+@if (theme$|async; as theme) {
+<nav
+  class="bg-background align-middle fixed top-0 z-[102] w-full"
+  [ngClass]="{
+      'border-b': theme === 'dark' || (theme === 'light' && !sidebarOpen),
+    }"
+>
+  <div class="flex justify-between items-center">
+    <div
+      class="flex w-72 py-1 px-2 bg-neutral-800 justify-between items-center"
+      [ngClass]="{
+        'bg-neutral-800': sidebarOpen,
+        'bg-background': !sidebarOpen
+      }"
+    >
+      <div class="flex justify-center items-center">
+        <img src="/assets/logo.png" class="h-8 w-8 my-1 mx-2" />
+        <!-- <span
+          class="text-xl font-semibold whitespace-nowrap text-white bg-emerald-900 py-1 px-2 flex items-center justify-center mr-2 rounded"
+          >{{ PANEL_CONFIG.shortName }}</span
+        > -->
+        <span
+          class="text-md font-semibold text-white whitespace-nowrap underline"
+          [ngClass]="{
+            'text-white': sidebarOpen,
+            'text-foreground': !sidebarOpen
+          }"
+          >{{ PANEL_CONFIG.name }}</span
+        >
+      </div>
+      <mx-icon
+        (click)="sidebarService.toggleSidebar()"
+        icon="dock_to_right"
+        size="lg"
+        class="cursor-pointer"
+        [iconClass]="{
+          'text-white': sidebarOpen,
+          'text-foreground': !sidebarOpen
+        }"
+      />
+    </div>
+    <div
+      class="flex-grow"
+      [ngClass]="{
+        'border-b': theme === 'light' && sidebarOpen
+      }"
+    >
+      <div class="flex justify-end">
+        <mx-dropdown>
+          <mx-button
+            variant="ghost"
+            class="justify-end mr-2"
+            size="icon"
+            trigger
+          >
+            <mx-icon icon="person" />
+          </mx-button>
+          <mx-dropdown-item
+            text="Light"
+            icon="light_mode"
+            (handleClick)="themeService.changeTheme('light')"
+          />
+          <mx-dropdown-item
+            text="Dark"
+            icon="dark_mode"
+            (handleClick)="themeService.changeTheme('dark')"
+          />
+          <mx-dropdown-item
+            text="Logout"
+            icon="logout"
+            (handleClick)="logout()"
+          />
+          <mx-dropdown-item [seperator]="true" />
+          <mx-dropdown-item [text]="'Last Build: ' + lastBuild" />
+        </mx-dropdown>
+      </div>
+    </div>
+  </div>
+</nav>
+}
